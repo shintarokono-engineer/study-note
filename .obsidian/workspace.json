@@ -11,10 +11,14 @@
             "id": "05b597df62c673aa",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "グラフビュー"
+              "type": "markdown",
+              "state": {
+                "file": "Web開発/バックエンド.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "バックエンド"
             }
           }
         ]
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Web開発/バックエンド.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "バックリンク"
+              "title": "バックエンドへのバックリンク"
             }
           },
           {
@@ -178,6 +183,8 @@
   },
   "active": "d53a04d8ceac7594",
   "lastOpenFiles": [
+    "Web開発/Node.js.md",
+    "Web開発/フロントエンド.md",
     "バックエンド/Buffer と Buffer.concat.md",
     "Web開発/SEO.md",
     "Web開発/React.md",
@@ -187,7 +194,6 @@
     "バックエンド/メール送信.md.tmp.16496.59fd7da0a06a",
     "開発環境/バージョン管理ツール.md",
     "Web開発/認証・非同期処理.md",
-    "Web開発/フロントエンド.md",
     "Web開発/TypeScript.md"
   ]
 }
