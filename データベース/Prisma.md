@@ -189,7 +189,7 @@ if (process.env.NODE_ENV !== 'production') g.prisma = prisma;
 | `findFirst({ where, orderBy })` | 条件に合う最初の 1 件。`where` に非一意フィールド・`OR` / `AND` / `NOT` も使える |
 | `findMany({ where, select, include, orderBy, take, skip })` | 0+ 件取得 |
 | `create({ data })` | 1 件 INSERT |
-| `upsert({ where, create, update })` | 「`where` に合う行があれば `update`、無ければ `create`」。**冪等な書き込み**(再実行しても結果が同じ)を作りやすい |
+| `upsert({ where, create, update })` | 「`where` に合う行があれば `update`、無ければ `create`」。**冪等な書き込み**(再実行しても結果が同じ)を作りやすい。`where` は **`@id` / `@unique` / `@@unique` のいずれか必須**。id が auto-generate で未確定 / FK が鶏卵 / unique 値が編集で変動するケースでは使えず、`findFirst → 分岐` に逃げる |
 | `update({ where: {<一意>}, data })` | 1 件 UPDATE。**該当行が無いと例外**(P2025) |
 | `updateMany({ where, data })` | 0+ 件 UPDATE。**該当行 0 でも例外にならない**。非一意条件で更新したい / 行の有無が不確実なときに使う |
 | `delete` / `deleteMany` | `update` / `updateMany` と同じ「1 件 vs 0+ 件」の使い分け |
@@ -213,6 +213,25 @@ if (process.env.NODE_ENV !== 'production') g.prisma = prisma;
   ```ts
   prisma.tenant.findUnique({ where: { slug }, select: { _count: { select: { members: true } } } });
   ```
+- **リレーションの書き込み(ネスト `data`)** — 子(`@relation(fields, references)` で FK 列を持つ側)の FK を `connect` / `create` 等で宣言的に操作
+  ```ts
+  // connect: 既存の親を unique で探し、子の FK 列にその id をセット(親は新規作成しない)
+  prisma.blogPost.update({
+    where: { id },
+    data: { delivery: { connect: { announcementId_channel: { announcementId, channel: 'BLOG' } } } },
+  });
+  // SQL: 1) SELECT id FROM Delivery WHERE ... 2) UPDATE BlogPost SET deliveryId = ...
+  ```
+  | キーワード | 意味 |
+  | --- | --- |
+  | `create` | 親を新規作成 + 紐付け |
+  | `connect` | 既存の親を unique で探す + 紐付け(不在は `RecordNotFoundError`) |
+  | `connectOrCreate` | 探して無ければ create |
+  | `disconnect: true` | FK 列を null に |
+  | `update` / `delete` | 親側のフィールド更新 / 削除 |
+  | `set` | 1:N で「この id 集合に置き換える」 |
+  - 親側から書いても子側から書いても **同じ SQL**(子の FK 列を書き換える)になる syntactic sugar
+  - 1:1 で BlogPost ↔ Delivery が相互参照する鶏卵パターンは「先に子を FK 抜きで `create` → 親を `upsert` → `connect` で後付け」 の 3 段に分けるのが定石
 
 ### enum の扱い
 
