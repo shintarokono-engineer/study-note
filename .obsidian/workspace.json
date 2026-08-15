@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Web開発/バックエンド.md",
+                "file": "データベース/Prisma.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "バックエンド"
+              "title": "Prisma"
             }
           }
         ]
@@ -96,7 +96,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Web開発/バックエンド.md",
+                "file": "データベース/Prisma.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -183,8 +183,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d53a04d8ceac7594",
+  "active": "05b597df62c673aa",
   "lastOpenFiles": [
+    "開発環境/バージョン管理ツール.md",
+    "開発環境/セキュリティ.md",
+    "_to_delete/シークレットスキャン.md",
+    "Web開発/バックエンド.md",
+    "_to_delete",
+    "開発環境/シークレットスキャン.md",
     "Web開発/Node.js.md",
     "Web開発/フロントエンド.md",
     "バックエンド/Buffer と Buffer.concat.md",
@@ -194,7 +200,6 @@
     "開発環境/デプロイ.md",
     "バックエンド/メール送信.md",
     "バックエンド/メール送信.md.tmp.16496.59fd7da0a06a",
-    "開発環境/バージョン管理ツール.md",
     "Web開発/認証・非同期処理.md",
     "Web開発/TypeScript.md"
   ]
